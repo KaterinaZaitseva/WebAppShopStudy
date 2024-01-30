@@ -402,3 +402,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/web-shop-client/.vscode/extensions.json
+/web-shop-client/.vscode/launch.json
+/web-shop-client/.vscode/tasks.json
