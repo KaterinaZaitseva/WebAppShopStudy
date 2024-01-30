@@ -1,0 +1,12 @@
+<div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <app-user-form style="width: 100%;" [registerUser]="registerUser" [loginValid]="loginValid"></app-user-form>
+    <div>
+        <button nz-button style="width: 147px; margin-left: 50px;"  
+            (click)="resetForm($event)">Reset</button>
+        <button nz-button style="width: 147px; margin-left: 6px;"
+            nzType="primary" (click)="submitForm()">Sign Up</button>
+    </div>
+    <div style="margin-top: 10px;">
+        Or <a routerLink="/authorize">log in</a> now!
+    </div>
+</div>

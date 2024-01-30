@@ -1,0 +1,17 @@
+<nz-card nz-card class="card"
+    nzTitle="{{product.name}}"
+    [nzExtra]="deleteTemplate">
+    <div class="content-container"> 
+      <div style="width: 40%; max-height: 100%; display: flex; align-items: center;">
+        <img alt="avatar" src="{{product.pictureUrl}}"/>
+      </div> 
+      <div>
+        <p>Descripton: {{product.description}}</p>
+        <p style="margin: 0;">Price: {{product.price}}$</p>
+      </div>
+    </div>
+
+    <ng-template #deleteTemplate>
+        <a nz-icon nzType="delete" nzTheme="outline" (click)="deleteFromCart()"></a>
+    </ng-template>
+</nz-card>

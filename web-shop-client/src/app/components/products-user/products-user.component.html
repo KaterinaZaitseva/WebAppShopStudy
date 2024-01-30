@@ -1,0 +1,5 @@
+<div class="cards-container" *ngIf="products$ | async as products"> 
+    <div *ngFor="let product of products | filterProducts:term">
+        <app-product-card [product]="product" (onAdded)="addToCard($event)"></app-product-card>
+    </div>
+</div>

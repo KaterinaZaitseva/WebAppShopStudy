@@ -1,0 +1,13 @@
+<nz-card nz-card class="card"
+    nzTitle="{{product.name}}"
+    [nzExtra]="extraTemplate">
+    <img alt="avatar"
+      src="{{product.pictureUrl}}"/>
+    <p>Descripton: {{product.description}}</p>
+    <p style="margin: 0;">Price: {{product.price}}$</p>
+    <ng-template #extraTemplate>
+        <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle">
+            <span nz-icon nzType="plus" (click)="addToCart()"></span>
+        </button>
+    </ng-template>
+</nz-card>

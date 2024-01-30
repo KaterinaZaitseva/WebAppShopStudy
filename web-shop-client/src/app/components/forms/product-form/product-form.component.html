@@ -1,0 +1,28 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid name!">
+      <input nz-input formControlName="name" maxlength="100" [(ngModel)]="product.name"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="description">Description</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid description!">
+      <textarea nz-input formControlName="description" maxLength="500" [(ngModel)]="product.description" [nzAutosize]="{ minRows: 2, maxRows: 5 }"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="price">Price</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid price!">
+      <nz-input-number-group nzPrefix="$" style="width: 100%">
+        <nz-input-number formControlName="price" maxlength="10" [nzStep]="0.01" [nzMin]="0" [nzMax]="1000000001" [(ngModel)]="product.price"></nz-input-number>
+      </nz-input-number-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="pictureUrl">Picture Url</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid picture url!">
+      <input nz-input formControlName="pictureUrl" [(ngModel)]="product.pictureUrl"/>
+    </nz-form-control>
+  </nz-form-item>
+</form>

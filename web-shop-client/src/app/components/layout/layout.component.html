@@ -1,0 +1,57 @@
+<nz-layout style="display: flex; min-height: 100%;">
+    <nz-layout>
+      <nz-header class="header-container">
+        <ul nz-menu nzMode="horizontal" style="width: 150px;" [nzTheme]="'dark'">
+          <li style="font-size: 16px;" nz-submenu nzTitle={{userName}} nzIcon="user">
+            <ul>
+              <li nz-menu-item (click)="logOut()">
+                <span style="padding-right: 4%; font-size: 20px;" nz-icon nzType="logout" nzTheme="outline"></span> 
+                <span style="font-size: 16px;">Log Out</span>
+              </li>
+              <li nz-menu-item routerLink="profile" [nzMatchRouter]="true">
+                <span style="padding-right: 4%; font-size: 20px;" nz-icon nzType="profile" nzTheme="outline"></span> 
+                <span style="font-size: 16px;">Profile</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul nz-menu nzTheme="dark" nzMode="horizontal">
+          <div *ngIf="adminCheck; else elseBlock" class="header-container">
+            <li nz-menu-item routerLink="products" [nzMatchRouter]="true">
+              <span nz-icon class="header-container-nav-items" 
+                nzType="shop" nzTheme="outline">
+              </span>
+            </li>
+            <li nz-menu-item routerLink="users" [nzMatchRouter]="true">
+              <span nz-icon class="header-container-nav-items" 
+                nzType="team" nzTheme="outline">
+              </span>
+            </li>
+          </div>
+
+          <ng-template #elseBlock>
+            <li nz-menu-item routerLink="products" [nzMatchRouter]="true">
+              <span nz-icon class="header-container-nav-items" 
+                nzType="shopping" nzTheme="outline">
+              </span>
+            </li>
+            <li nz-menu-item routerLink="cart" [nzMatchRouter]="true">
+              <nz-badge [nzCount]="cartStorageService.getProducts().length" [nzOverflowCount]="10">
+                <span nz-icon class="header-container-nav-items"
+                  nzType="shopping-cart" nzTheme="outline">
+                </span>
+              </nz-badge>
+  
+            </li>
+          </ng-template>
+        </ul>
+
+      </nz-header>
+
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+
+      <nz-footer style="width: 100%; text-align: center;">Katuska ©2023 Implement By Angular</nz-footer>
+    </nz-layout>
+  </nz-layout>

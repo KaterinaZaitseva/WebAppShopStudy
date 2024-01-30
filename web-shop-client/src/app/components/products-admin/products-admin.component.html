@@ -1,0 +1,11 @@
+<app-modal-create-product style="position: fixed; bottom: 40px; right: 40px" (onChange)="updateProducts()"></app-modal-create-product>
+<app-modal-edit-product></app-modal-edit-product>
+
+<div class="cards-container" *ngIf="products$ | async as products"> 
+    <div *ngFor="let product of products | filterProducts:term">
+        <app-product-editable-card [product]="product" (onChange)="updateProducts()" 
+            (onEdit)="editProduct($event)">
+        </app-product-editable-card>
+    </div>
+</div>
+

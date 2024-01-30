@@ -1,0 +1,8 @@
+<nz-modal [(nzVisible)]="isVisible" 
+  nzTitle="Editing" 
+  (nzOnCancel)="handleCancel()" 
+  (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <app-product-form [product]="product"></app-product-form>
+  </ng-container>
+</nz-modal>

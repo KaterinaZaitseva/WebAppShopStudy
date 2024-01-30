@@ -1,0 +1,17 @@
+<div>
+  <div style="width: 30%;" >
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input [(ngModel)]="term" type="text" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <span nz-icon nzType="search"></span>
+    </ng-template>
+  </div>
+
+  <div *ngIf="adminCheck; else elseBlock">
+    <app-products-admin [term]="term" [products$]="products$"></app-products-admin>
+  </div>
+  <ng-template #elseBlock>
+    <app-products-user [term]="term" [products$]="products$"></app-products-user>
+  </ng-template>
+</div>

@@ -1,0 +1,12 @@
+[nz-form] {
+    max-width: 600px;
+}
+
+button {
+    margin-left: 8px;
+}
+
+.align-center {
+    display: flex;
+    justify-content: center;
+}

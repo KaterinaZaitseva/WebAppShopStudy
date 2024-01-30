@@ -1,0 +1,3 @@
+<div class="cards-container" *ngFor="let product of productsCart">
+    <app-product-cart-card [product]="product" (onDelete)="deleteFromCart($event)"></app-product-cart-card>
+</div>

@@ -1,0 +1,23 @@
+<nz-card nz-card class="card"
+  [nzActions]="[actionEdit, actionDelete]"
+  nzTitle="{{product.name}}">
+  <img alt="avatar"
+    src="{{product.pictureUrl}}"/>
+  <p>Descripton: {{product.description}}</p>
+  <p style="margin: 0;">Price: {{product.price}}$</p>
+  
+  <ng-template #actionEdit>
+    <span nz-icon nzType="edit" (click)="editProduct()"></span>
+  </ng-template>
+  
+  <ng-template #actionDelete>
+    <span
+      nz-icon nzType="delete"
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure delete this product"
+      nzPopconfirmPlacement="bottom"
+      (nzOnConfirm)="confirmDelete()"
+      (nzOnCancel)="cancelDelete()">
+    </span>
+  </ng-template>
+</nz-card>
