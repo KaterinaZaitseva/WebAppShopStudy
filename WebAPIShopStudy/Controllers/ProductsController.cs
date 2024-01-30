@@ -4,7 +4,7 @@ using Microsoft.VisualBasic;
 using WebAPIShopStudy.Models.Entities;
 using WebAPIShopStudy.Persistence;
 using WebAPIShopStudy.Services.CrudService.Implementation;
-using WebAPIShopStudy.Services.CrudService.Interfaces;
+using WebAPIShopStudy.Services.ModelServices.Interfaces;
 
 namespace WebAPIShopStudy.Controllers;
 
@@ -22,12 +22,12 @@ public class ProductsController : ControllerBase {
 
     [Authorize(Roles = "admin, user")]
     [HttpGet]
-    public async Task<IEnumerable<ProductModel>?> GetProducts() {
+    public async Task<IActionResult> GetProducts() {
         try {
-            return await _productCrudService.GetAllAsync();
+            return Ok(await _productCrudService.GetAllCacheAsync());
         }
         catch (Exception) {
-            return null;
+            return NotFound();
         }
     }
 
@@ -35,10 +35,10 @@ public class ProductsController : ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id) {
         try {
-            return new OkObjectResult(await _productCrudService.GetByIdAsync(id));
+            return Ok(await _productCrudService.GetByIdCacheAsync(id));
         }
         catch (Exception) {
-            return new NotFoundResult();
+            return NotFound();
         }
     }
 
@@ -46,11 +46,11 @@ public class ProductsController : ControllerBase {
     [HttpPut("{id}")]
     public async Task<IActionResult> PutProduct(int id, ProductModel product) {
         try {
-            await _productCrudService.UpdateAsync(id, product);
-            return new OkResult();
+            await _productCrudService.UpdateCacheAsync(id, product);
+            return Ok();
         }
         catch (Exception) {
-            return new NotFoundResult();
+            return NotFound();
         }
     }
 
@@ -58,11 +58,11 @@ public class ProductsController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> PostProduct(ProductModel product) {
         try {
-            await _productCrudService.AddAsync(product);
-            return new OkResult();
+            await _productCrudService.AddCacheAsync(product);
+            return Ok();
         }
         catch (Exception) {
-            return new NotFoundResult();
+            return NotFound();
         }
     }
 
@@ -70,11 +70,11 @@ public class ProductsController : ControllerBase {
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProduct(int id) {
         try {
-            await _productCrudService.RemoveAsync(id);
-            return new OkResult();
+            await _productCrudService.RemoveCacheAsync(id);
+            return Ok();
         }
         catch (Exception) {
-            return new NotFoundResult();
+            return NotFound();
         }
     }
 

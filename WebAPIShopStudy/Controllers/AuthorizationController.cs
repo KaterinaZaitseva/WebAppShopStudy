@@ -22,11 +22,11 @@ public class AuthorizationController : ControllerBase {
     [HttpPost]
     [Route("Authorize")]
     public async Task<IActionResult> LogIn(UserAuthorizationModel model) {
-        try {
-            return new OkObjectResult(await _authorizationService.AuthorizeAsync(model));
+        try {  
+            return Ok(await _authorizationService.AuthorizeAsync(model));
         }
-        catch (Exception) {
-            return new NotFoundResult();
+        catch (Exception e){
+            return BadRequest(e.Message);
         }
     }
 
@@ -35,10 +35,10 @@ public class AuthorizationController : ControllerBase {
     public async Task<IActionResult> Register(UserRegistrationModel model) {
         try {
             await _registrationService.RegisterAsync(model);
-            return new OkResult();
+            return Ok();
         }
-        catch(Exception) {
-            return new BadRequestResult();
+        catch(Exception e) {
+            return BadRequest(e.Message);
         }
     }
 }

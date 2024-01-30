@@ -33,7 +33,7 @@ namespace WebAPIShopStudy.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("WebAPIShopStudy.Models.Entities.ProductModel", b =>
@@ -64,7 +64,7 @@ namespace WebAPIShopStudy.Migrations
 
                     b.HasIndex("OrderModelId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("WebAPIShopStudy.Models.Entities.UserModel", b =>
@@ -87,7 +87,7 @@ namespace WebAPIShopStudy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("WebAPIShopStudy.Models.Entities.OrderModel", b =>

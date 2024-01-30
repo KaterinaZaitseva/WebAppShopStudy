@@ -3,7 +3,7 @@ using WebAPIShopStudy.Models;
 using WebAPIShopStudy.Models.Entities;
 using WebAPIShopStudy.Persistence.JWT.Interfaces;
 using WebAPIShopStudy.Services.AuthorizationService.Interfaces;
-using WebAPIShopStudy.Services.CrudService.Interfaces;
+using WebAPIShopStudy.Services.ModelServices.Interfaces;
 
 namespace WebAPIShopStudy.Services.AuthorizationService.Implementation;
 

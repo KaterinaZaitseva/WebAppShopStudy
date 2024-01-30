@@ -7,7 +7,7 @@ public interface ICrudService<T> where T : BaseModel {
     public T? GetById(int id);
     public T? FirstOrDefault(Func<T, bool> predicate);
 
-    public void Add(T entity);
-    public void Update(int id, T entity);
+    public void Add(T model);
+    public void Update(int id, T model);
     public void Remove(int id);
 }

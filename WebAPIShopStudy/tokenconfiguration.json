@@ -1,7 +1,0 @@
-{
-  "JwtSettings": {
-    "Issuer": "Server",
-    "Audience": "Client",
-    "SecretKey": "mysupersecret_secretkey!123"
-  }
-}

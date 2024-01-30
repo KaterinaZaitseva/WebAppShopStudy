@@ -1,39 +1,19 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using WebAPIShopStudy.Extensions;
 using WebAPIShopStudy.Persistence;
-using WebAPIShopStudy.Persistence.JWT.Interfaces;
 using WebAPIShopStudy.Persistence.JWT.Implementation;
-using WebAPIShopStudy.Services.CrudService.Interfaces;
-using WebAPIShopStudy.Services.CrudService.Implementation;
-using WebAPIShopStudy.Services.AuthorizationService.Interfaces;
-using WebAPIShopStudy.Services.AuthorizationService.Implementation;
+using WebAPIShopStudy.Persistence.JWT.Interfaces;
+using WebAPIShopStudy.Services.EmailServices.Implementation;
+using WebAPIShopStudy.Services.EmailServices.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ShopDbContext>();
-builder.Services.AddSingleton<IJwtConfiguration, JwtConfiguration>();
-builder.Services.AddSingleton<IJwtGenerator, JwtGenerator>();
+
+//builder.Services.AddHostedService<HostedService>();
+
 IJwtConfiguration jwtConfiguration = new JwtConfiguration();
 
-builder.Services.
-    AddAuthentication(options => {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(options => {
-        options.TokenValidationParameters = new TokenValidationParameters() {
-            ValidIssuer = jwtConfiguration.Issuer,
-            ValidAudience = jwtConfiguration.Audience,
-            IssuerSigningKey = jwtConfiguration.SigningCredentials.Key,
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = false,
-            ValidateIssuerSigningKey = true
-
-        };
-
-    });
+builder.Services.AddTokenService(jwtConfiguration);
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication();
@@ -42,15 +22,12 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IRegistrationService, RegistrationService>();
-builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+builder.Services.AddModelsService();
+builder.Services.AddAuthorizationService();
 
-builder.Services.AddStackExchangeRedisCache(options => {
-    options.Configuration = "localhost";
-    options.InstanceName = "local";
-});
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddRedisService(builder.Configuration.GetSection("RedisSettings"));
 
 var app = builder.Build();
 

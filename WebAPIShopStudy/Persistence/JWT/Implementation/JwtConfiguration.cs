@@ -8,13 +8,13 @@ public class JwtConfiguration : IJwtConfiguration {
 
     public JwtConfiguration() {
 
-        IConfiguration _configuration = new ConfigurationBuilder()
-            .AddJsonFile("tokenconfiguration.json", true, true)
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", true, true)
             .Build();
 
-        Issuer = _configuration["JwtSettings:Issuer"]!;
-        Audience = _configuration["JwtSettings:Audience"]!;
-        SecretKey = _configuration["JwtSettings:SecretKey"]!;
+        Issuer = configuration["JwtSettings:Issuer"]!;
+        Audience = configuration["JwtSettings:Audience"]!;
+        SecretKey = configuration["JwtSettings:SecretKey"]!;
 
         SigningCredentials = new SigningCredentials(
             new SymmetricSecurityKey(

@@ -1,13 +1,14 @@
 ﻿using WebAPIShopStudy.Models;
 using WebAPIShopStudy.Persistence.JWT.Interfaces;
 using WebAPIShopStudy.Services.AuthorizationService.Interfaces;
-using WebAPIShopStudy.Services.CrudService.Interfaces;
+using WebAPIShopStudy.Services.ModelServices.Interfaces;
 
 namespace WebAPIShopStudy.Services.AuthorizationService.Implementation;
 
 public class AuthorizationService : IAuthorizationService {
 
-    public AuthorizationService(IJwtGenerator tokenGenerator, IUserService userCrudService) {
+    public AuthorizationService(IJwtGenerator tokenGenerator, 
+        IUserService userCrudService) {
         _tokenGenerator = tokenGenerator;
         _userCrudService = userCrudService;
     }
@@ -18,8 +19,8 @@ public class AuthorizationService : IAuthorizationService {
 
 
     public async Task<UserResponseAuthorizationModel> AuthorizeAsync(UserAuthorizationModel model) {
-        var user = await _userCrudService.FirstOrDefaultAsync(
-            u => u.Login == model.Login && 
+        var user = await _userCrudService.FirstOrDefaultAsync( u => 
+            u.Login == model.Login && 
             u.Password == model.Password
         );
 

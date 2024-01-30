@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using WebAPIShopStudy.Models.Entities;
 using WebAPIShopStudy.Persistence;
-using WebAPIShopStudy.Services.CrudService.Interfaces;
+using WebAPIShopStudy.Services.ModelServices.Interfaces;
 
 namespace WebAPIShopStudy.Controllers;
 
@@ -23,7 +23,7 @@ public class UsersController : ControllerBase {
     [HttpGet]
     public async Task<IActionResult> GetUsers() {
         try {
-            return new JsonResult(await _userCrudService.GetAllAsync());
+            return new JsonResult(await _userCrudService.GetAllCacheAsync());
         }
         catch (Exception) {
             return new NotFoundResult();
@@ -34,7 +34,7 @@ public class UsersController : ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUser(int id) {
         try {
-            return new JsonResult(await _userCrudService.GetByIdAsync(id));
+            return new JsonResult(await _userCrudService.GetByIdCacheAsync(id));
         }
         catch (Exception) {
             return new NotFoundResult();
@@ -45,7 +45,7 @@ public class UsersController : ControllerBase {
     [HttpPut("{id}")]
     public async Task<IActionResult> PutUser(int id, UserModel user) {
         try {
-            await _userCrudService.UpdateAsync(id, user);
+            await _userCrudService.UpdateCacheAsync(id, user);
             return new OkResult();
         }
         catch (Exception) {
@@ -57,7 +57,7 @@ public class UsersController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> PostUser(UserModel user) {
         try {
-            await _userCrudService.AddAsync(user);
+            await _userCrudService.AddCacheAsync(user);
             return new OkResult();
         }
         catch (Exception) {
@@ -69,7 +69,7 @@ public class UsersController : ControllerBase {
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id) {
         try {
-            await _userCrudService.RemoveAsync(id);
+            await _userCrudService.RemoveCacheAsync(id);
             return new OkResult();
         }
         catch (Exception) {
