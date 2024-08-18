@@ -24,7 +24,7 @@ public class ProductsController : ControllerBase {
     [HttpGet]
     public async Task<IActionResult> GetProducts() {
         try {
-            return Ok(await _productCrudService.GetAllCacheAsync());
+            return Ok(await _productCrudService.GetAllAsync());
         }
         catch (Exception) {
             return NotFound();
@@ -35,7 +35,7 @@ public class ProductsController : ControllerBase {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProduct(int id) {
         try {
-            return Ok(await _productCrudService.GetByIdCacheAsync(id));
+            return Ok(await _productCrudService.GetByIdAsync(id));
         }
         catch (Exception) {
             return NotFound();
@@ -46,7 +46,7 @@ public class ProductsController : ControllerBase {
     [HttpPut("{id}")]
     public async Task<IActionResult> PutProduct(int id, ProductModel product) {
         try {
-            await _productCrudService.UpdateCacheAsync(id, product);
+            await _productCrudService.UpdateAsync(id, product);
             return Ok();
         }
         catch (Exception) {
@@ -58,11 +58,11 @@ public class ProductsController : ControllerBase {
     [HttpPost]
     public async Task<IActionResult> PostProduct(ProductModel product) {
         try {
-            await _productCrudService.AddCacheAsync(product);
+            await _productCrudService.AddAsync(product);
             return Ok();
         }
         catch (Exception) {
-            return NotFound();
+            return BadRequest();
         }
     }
 
@@ -70,7 +70,7 @@ public class ProductsController : ControllerBase {
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProduct(int id) {
         try {
-            await _productCrudService.RemoveCacheAsync(id);
+            await _productCrudService.RemoveAsync(id);
             return Ok();
         }
         catch (Exception) {
